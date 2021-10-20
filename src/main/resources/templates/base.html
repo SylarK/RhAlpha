@@ -1,32 +1,38 @@
-<head th:fragment="cabecalho">
+<div th:fragment="cabecalho">
 	<meta charset="UTF-8"/>
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">	
 	
+		
+		<!--Fontawesome CDN-->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 	<style>
+	
 		.logo-container{
-			background-color: #47bcff;
+			background-color: #85DCB0;
 			color: #FFF;
 		}
-		
+				
 		.logo{
 			font-family: 'Handlee', cursive;
 			font-size: 2.5rem;
 		}
 		
-		.active{
-			font-weight: bold;
+		.login{
+			background-color: #C38D9E;
 		}
+		
 	</style>
-</head>
+</div>
 
 <div th:fragment="logo" class="">
 	<div class="row logo-container p-3 d-flex justify-content-between">
-		<span class="logo ml-2">mudi</span>
-		<span class="mt-3 mr-2">
+		<span class="logo ml-4">RhAlpha</span>
+		<span class="mt-3 mr-4">
 			<a class="text-light" sec:authorize="!isAuthenticated()" href="/login">login</a>
 			<a onclick="document.querySelector('#form-login').submit()" class="text-light" sec:authorize="isAuthenticated()" href="#">logout</a>
 			<form id="form-login" th:action="@{/logout}" method="post"></form>
@@ -35,13 +41,13 @@
 	<div class="row" sec:authorize="isAuthenticated()">
 		<div class="col">
 			<nav class="nav">
-			  <a class="nav-link" th:href="@{/home}">Home</a>
-			  <a class="nav-link" th:href="@{/usuario/pedido}">Meus Pedidos</a>
+			  <a class="nav-link" th:href="@{/home}">Principal</a>
+			  <a class="nav-link" th:href="@{/usuario/pedido}">Relatórios</a>
 			</nav>
 		</div>
 	</div>
 </div>
 
-<div th:fragment="titulo(valor)" class="jumbotron mb-0">
+<div th:fragment="titulo(valor)" class="login jumbotron mb-0 mt-2">
 	<h1 class="display-4" th:text="${valor}"></h1>
 </div>

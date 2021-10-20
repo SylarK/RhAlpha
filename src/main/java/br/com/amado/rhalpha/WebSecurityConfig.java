@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
@@ -41,16 +42,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		//Criando o usuário default para realizar alguns testes
-		UserDetails user = User.builder()
-				.username("admin")
-				.password("admin")
-				.roles("ADM")
-				.build();		
+//		UserDetails user = User.builder()
+//				.username("admin")
+//				.password(encoder.encode("admin"))
+//				.roles("ADM")
+//				.build();		
 		
 		auth.jdbcAuthentication()
 			.dataSource(dataSource)
-			.passwordEncoder(encoder)
-			.withUser(user);
+			.passwordEncoder(encoder);
+			//.withUser(user);
+	}
+	
+	@Bean
+	public PasswordEncoder encoder() {
+	    return new BCryptPasswordEncoder();
 	}
 	
 }
