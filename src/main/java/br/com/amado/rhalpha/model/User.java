@@ -2,6 +2,8 @@ package br.com.amado.rhalpha.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -17,5 +19,5 @@ public class User {
 	private String username;
 	private String password;
 	private Boolean enabled;
-	
+		
 }

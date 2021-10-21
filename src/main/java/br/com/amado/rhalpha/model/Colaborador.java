@@ -1,12 +1,13 @@
 package br.com.amado.rhalpha.model;
 
-import javax.annotation.Generated;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -25,9 +26,8 @@ public class Colaborador {
 	private String sobrenome;
 	private String email;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "username")
 	private User user; 
-	
 	
 }
