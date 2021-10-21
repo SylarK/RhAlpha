@@ -36,4 +36,12 @@ public class RegistroPonto {
 		
 	}
 	
+	@Override
+	public String toString() {		
+		return "[\tRegistroPonto\t] "
+				+ "Usuário: " + this.user.getUsername() + " \n"
+				+ "Hora Registro: " + this.horaRegistro + " \n"
+				+ "Data do Registro: " + this.dataRegistro + " \n";
+	}
+	
 }
