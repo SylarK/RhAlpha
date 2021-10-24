@@ -36,6 +36,7 @@ public class RegistroPontoRest {
 	@Autowired
 	private UserRepository userRepository;
 
+
 	@GetMapping("registrar")
 	public String criaRegistroPonto() throws ParseException {
 
@@ -54,6 +55,20 @@ public class RegistroPontoRest {
 		registro.toRecord(timeValue, dateValue, usuario);
 		registroPontoRepository.save(registro);
 		return registro.toString();
+	}
+
+	@GetMapping("getRegistros")
+	public String retornarPontosRegistrados() {
+
+		User user = new User();
+
+		String username = user.getUsernameFromUser();
+		LocalDate dateNow = LocalDate.now();
+		Date dateValue = java.util.Date.from(dateNow.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+
+		List<RegistroPonto> getList = registroPontoRepository.findAllPontosBySpecificDay(username, dateValue);
+
+		return getList.toString();
 	}
 	
 }
