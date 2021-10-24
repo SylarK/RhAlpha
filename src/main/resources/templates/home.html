@@ -8,6 +8,7 @@
     
     	<style>
 			@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
     		.img-avatar{    		  
     		  object-fit: cover;
 			  border-radius:50%;
@@ -33,10 +34,22 @@
 				font-size: 1.3em;
 				padding-top: 2%;
 			}
+
+			.logo-style{
+				width: 36px;
+				height: 36px;
+				margin-left: 50%;
+				font-family: 'Fira Code', monospace;
+			}
+
+			.position-btn-log{
+				margin-right: 2%;
+			}
+
     	</style>
     </head>
     <body>
-	<nav></nav>
+	<nav th:replace="~{base :: navMain}"></nav>
     <div id="app">
 		<div class="container">
 			<div class="row d-flex justify-content-center text-center mt-5 mb-5">
