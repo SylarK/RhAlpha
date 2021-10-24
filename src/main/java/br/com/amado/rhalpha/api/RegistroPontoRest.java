@@ -1,65 +1,56 @@
 package br.com.amado.rhalpha.api;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import br.com.amado.rhalpha.dto.NovoRegistroPontoDTO;
 import br.com.amado.rhalpha.model.RegistroPonto;
 import br.com.amado.rhalpha.model.User;
 import br.com.amado.rhalpha.repository.RegistroPontoRepository;
 import br.com.amado.rhalpha.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
 
 @RestController
-@RequestMapping("api/ponto")
+@RequestMapping("/api/ponto")
 public class RegistroPontoRest {
-	
+
 	DateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
-	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	@Autowired
 	private RegistroPontoRepository registroPontoRepository;
+
 	@Autowired
 	private UserRepository userRepository;
-	
-	@GetMapping("registrarteste")
-	public String testeRegistro() throws ParseException {
-		DateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		
-		RegistroPonto registro = new RegistroPonto();
-		User usuario = userRepository.getById("admin");
-		
-		Time timeValue = new Time(timeFormat.parse("19:00:00").getTime());
-		Date dateValue = dateFormat.parse("20/10/2021");
-		
-		
-		
-		registro.toRecord(timeValue, dateValue, usuario);
-		registroPontoRepository.save(registro);
-		return registro.toString();
-	}
-	
-	@PostMapping("registrar")
-	public String criaRegistroPonto(@RequestBody NovoRegistroPontoDTO novoRegistro) throws ParseException {
+
+	@GetMapping("registrar")
+	public String criaRegistroPonto() throws ParseException {
+
+		NovoRegistroPontoDTO novoRegistro = new NovoRegistroPontoDTO();
 		novoRegistro.atribuirNomeUsuario();
-				
+
+		LocalDate dateNow = LocalDate.now();
+		LocalTime timeNow = LocalTime.now();
+
+		Time timeValue = Time.valueOf(timeNow);
+		Date dateValue = java.util.Date.from(dateNow.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+
 		RegistroPonto registro = new RegistroPonto();
 		User usuario = userRepository.getById(novoRegistro.getNomeUsuario());
-		
-		Time timeValue = new Time(this.timeFormat.parse(novoRegistro.getHoraRegistro()).getTime());
-		Date dateValue = this.dateFormat.parse(novoRegistro.getDataRegistro());
-		
+
 		registro.toRecord(timeValue, dateValue, usuario);
 		registroPontoRepository.save(registro);
 		return registro.toString();

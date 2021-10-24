@@ -13,12 +13,14 @@
 			  width: 150px;
 			  height: 150px;
     		}
-    		
-    		.service{
-    		 display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    		}
+
+			.outdoor-time{
+				font-family: 'Helvetica Neue', sans-serif;
+				font-size: 3.3em;
+				font-weight: bold;
+				letter-spacing: -1px;
+				line-height: 1;
+			}
     	</style>
     </head>
     <body>
@@ -39,12 +41,13 @@
 				<div class="col text-center">{{users.nome}}</div>
 			</div>
 			<div class="row mt-5">
-				<div class="col text-center">{{ timestamp }}</div>
+				<div class="col text-center outdoor-time">{{ timestamp }}</div>
 			</div>
 			<div class="row mt-5">
-				<div class="col text-center">Registrar Ponto</div>
-				<br>
-				<button v-on:click="enviarRegistroPonto()" class="btn btn-primary mt-2">Enviar Registro</button>
+				<div  class="col text-center form-button">
+					<input v-on:click=enviarRegistroPonto() class="btn btn-primary" type="button" value="Registrar Ponto">
+				</div>
+<!--				<button  type="button" class="btn btn-primary">Registrar Ponto</button>-->
 			</div>
 			<!-- Tabela 
 				<div class="row justify-content-md-center mt-5">
@@ -81,16 +84,10 @@
 							const today = new Date();
 		                    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 		                    this.timestamp = time;
-		                    //const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-		                    //const dateTime = date +' '+ time;		                    
 						},
 					enviarRegistroPonto: function(){
-						axios.post('http://localhost:8080/api/ponto/registrar', {
-								horaRegistro: this.timestamp,
-								dataRegistro: this.todayIs,
-								nomeUsuario: ""
-							})
-							.then(response => console.log(response))
+						axios.get('http://localhost:8085/api/ponto/registrar')
+							.then(response => console.log(response.status))
 							.catch	(error => {
 									console.log(error)
 								})	

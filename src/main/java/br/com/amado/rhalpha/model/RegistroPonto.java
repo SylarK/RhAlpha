@@ -35,6 +35,8 @@ public class RegistroPonto {
 		this.user = usuario;
 		
 	}
+
+	public RegistroPonto(){}
 	
 	@Override
 	public String toString() {		
