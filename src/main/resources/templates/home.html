@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">	
     
     	<style>
+			@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
     		.img-avatar{    		  
     		  object-fit: cover;
 			  border-radius:50%;
@@ -21,6 +22,17 @@
 				letter-spacing: -1px;
 				line-height: 1;
 			}
+
+			.heading-table{
+				font-family: 'Fira Code', monospace;
+				font-size: 0.8em;
+			}
+
+			.username-style{
+				font-family: 'Fira Code', monospace;
+				font-size: 1.3em;
+				padding-top: 2%;
+			}
     	</style>
     </head>
     <body>
@@ -28,12 +40,10 @@
     <div id="app">
 		<div class="container">
 			<div class="row d-flex justify-content-center text-center mt-5 mb-5">
-				<div class="col-2"></div>
-				<div class="col-8" role="group">
+				<div class="col-8 col-sm-12" role="group">
 					<button type="button" class="btn btn btn-outline-dark active">Principal</button>
 					<button type="button" class="btn btn btn-outline-dark">Relatórios</button>
 				</div>
-				<div class="col-2"></div>
 			</div>
 			<div class="row">
 				<div class="text-center">
@@ -41,9 +51,9 @@
 				</div>
 			</div>
 			<div class="row mt-2">
-				<div class="col text-center">{{users.nome}}</div>
+				<div class="col text-center username-style">{{users.nome}}</div>
 			</div>
-			<div class="row mt-5">
+			<div class="row mt-4">
 				<div class="col text-center outdoor-time">{{ timestamp }}</div>
 			</div>
 			<div class="row mt-5">
@@ -60,14 +70,14 @@
 						<thead>
 						<tr>
 							<th scope="col">#</th>
-							<th scope="col">Data</th>
-							<th scope="col">Entrada</th>
-							<th scope="col">Saída</th>
-							<th scope="col">Entrada</th>
-							<th scope="col">Saída</th>
-							<th scope="col">Entrada</th>
-							<th scope="col">Saída</th>
-							<th scope="col">-</th>
+							<th scope="col" class="heading-table">Data</th>
+							<th scope="col" class="heading-table">Entrada</th>
+							<th scope="col" class="heading-table">Saída</th>
+							<th scope="col" class="heading-table">Entrada</th>
+							<th scope="col" class="heading-table">Saída</th>
+							<th scope="col" class="heading-table">Entrada</th>
+							<th scope="col" class="heading-table">Saída</th>
+							<th scope="col" class="heading-table">-</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -98,18 +108,18 @@
 					titles:['Principal', 'Relatórios'],
 					users:{nome: 'Bruce Banner', urlImage: 'https://images.unsplash.com/photo-1590586914586-9df5c6dfc39d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=727&q=80'},
 					timestamp: "",
-					todayIs: ""
+					todayIs: "",
 				}
-		
-				function formatTime( timeFromDate ){
 
-					let timeInString = String(timeFromDate);
-					
-					if(timeInString.length < 2){
-						timeInString = '0' + timeInString;
-					}
-					return timeInString;
-				}
+		function formatTime( timeFromDate ){
+
+			let timeInString = String(timeFromDate);
+
+			if(timeInString.length < 2){
+				timeInString = '0' + timeInString;
+			}
+			return timeInString;
+		}
 	
 		new Vue({
 				el: "#app",
@@ -124,12 +134,17 @@
 					console.log("Component is mounted")
 					},
 				methods:{
+					loaded(){
+						this.isLoaded = true;
+						this.isLoading = false;
+					},
 					getNow: function(){
 							const today = new Date();
 						const time = 	formatTime(today.getHours()) + ":" 
 										+ formatTime(today.getMinutes()) + ":" 
 										+ formatTime(today.getSeconds());
 		                    this.timestamp = time;
+							this.loaded();
 						},
 					enviarRegistroPonto: function(){
 						axios.get('http://localhost:8085/api/ponto/registrar')
