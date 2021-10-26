@@ -1,17 +1,16 @@
 package br.com.amado.rhalpha.api;
 
+import br.com.amado.rhalpha.dto.RegistrosPontoDTO;
 import br.com.amado.rhalpha.dto.NovoRegistroPontoDTO;
 import br.com.amado.rhalpha.model.RegistroPonto;
 import br.com.amado.rhalpha.model.User;
 import br.com.amado.rhalpha.repository.RegistroPontoRepository;
 import br.com.amado.rhalpha.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import java.sql.Time;
 import java.text.DateFormat;
@@ -20,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +29,6 @@ public class RegistroPontoRest {
 
 	DateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
 	DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
 	@Autowired
 	private RegistroPontoRepository registroPontoRepository;
 
@@ -58,7 +57,7 @@ public class RegistroPontoRest {
 	}
 
 	@GetMapping("getRegistros")
-	public String retornarPontosRegistrados() {
+	public List<RegistrosPontoDTO> retornarPontosRegistrados(){
 
 		User user = new User();
 
@@ -66,9 +65,15 @@ public class RegistroPontoRest {
 		LocalDate dateNow = LocalDate.now();
 		Date dateValue = java.util.Date.from(dateNow.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 
-		List<RegistroPonto> getList = registroPontoRepository.findAllPontosBySpecificDay(username, dateValue);
+		List<RegistroPonto> temporario = new ArrayList<>(registroPontoRepository.findAllPontosBySpecificDay(username, dateValue));
 
-		return getList.toString();
+		List<RegistrosPontoDTO> lista = RegistrosPontoDTO.converter(temporario);
+
+		if(lista.size() > 6){
+			lista.remove(lista.size());
+		}
+
+		return lista;
 	}
 	
 }

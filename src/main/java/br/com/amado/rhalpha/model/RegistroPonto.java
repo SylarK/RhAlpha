@@ -1,5 +1,8 @@
 package br.com.amado.rhalpha.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -12,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "registro_ponto")
 public class RegistroPonto {
 
@@ -37,13 +42,6 @@ public class RegistroPonto {
 	}
 
 	public RegistroPonto(){}
-	
-	@Override
-	public String toString() {		
-		return "[\tRegistroPonto\t] "
-				+ "Usuário: " + this.user.getUsername() + " \n"
-				+ "Hora Registro: " + this.horaRegistro + " \n"
-				+ "Data do Registro: " + this.dataRegistro + " \n";
-	}
+
 	
 }
