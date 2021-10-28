@@ -21,6 +21,12 @@ public interface RegistroPontoRepository extends JpaRepository<RegistroPonto, Lo
             " AND rp.data_registro = :data ", nativeQuery = true)
     ArrayList<RegistroPonto> findAllPontosBySpecificDay(@Param("username") String username, @Param("data") Date data);
 
+    @Query(value="SELECT * " +
+            " FROM registro_ponto rp " +
+            " WHERE rp.user_username = :username " +
+            " AND rp.data_registro BETWEEN :firstData AND :lastData ", nativeQuery = true)
+    ArrayList<RegistroPonto> findAllPontosCurrentWeek(@Param("username") String username, @Param("firstData") Date firstData
+                                                                                        ,@Param("lastData") Date lastData);
 
 
 }

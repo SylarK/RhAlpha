@@ -31,7 +31,7 @@
 	</style>
 </div>
 
-<nav th:fragment="navMain" class="navbar navbar-light bg-light justify-content-between">
+<nav th:fragment="navMain" class="navbar navbar-light bg-light justify-content-between navbar-style">
 	<a class="navbar navbar-brand" href="#">
 		<img src="https://cdn-icons-png.flaticon.com/512/1584/1584892.png" class="logo-style" alt="Logo RhAlpha">
 	</a>
@@ -43,4 +43,15 @@
 
 <div th:fragment="titulo(valor)" class="login jumbotron mb-0 mt-2">
 	<h1 class="display-4" th:text="${valor}"></h1>
+</div>
+
+<div th:fragment="mainButtons(current)" class="row d-flex justify-content-center text-center mt-5 mb-5">
+	<div class="col-8 col-sm-12" role="group">
+		<a 	th:href="@{/home}" class="btn btn btn-outline-dark"
+			th:classappend = "${current} == 'main' ? active : common"
+		>Principal</a>
+		<a 	th:href="@{/report}" class="btn btn btn-outline-dark"
+		   	th:classappend = "${current} == 'report' ? active : common"
+		>Relatórios</a>
+	</div>
 </div>

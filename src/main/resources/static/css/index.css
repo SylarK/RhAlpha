@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+html,body{
+    font-family: 'Numans', sans-serif;
+    height: auto;
+    background-image: linear-gradient(to top, #fffbfa 0%, #ace0f9 100%);
+}
+
+.img-avatar{
+    object-fit: cover;
+    border-radius:50%;
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .2);
+}
+
+.outdoor-time{
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 3.3em;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+.heading-table{
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8em;
+}
+
+.username-style{
+    font-family: 'Fira Code', monospace;
+    font-size: 1.3em;
+    padding-top: 2%;
+}
+
+.logo-style{
+    width: 36px;
+    height: 36px;
+    margin-left: 50%;
+    font-family: 'Fira Code', monospace;
+}
+
+.position-btn-log{
+    margin-right: 2%;
+}
+
+.modal-error-registro{
+    width: 30%;
+    height: 30%;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: rgba(60, 58, 57, 0.95);
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.navbar-style{
+    background-color: rgba(227, 227, 227, 0.26) !important;
+    border-bottom: 1px solid rgba(106, 106, 106, 0.3);
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
