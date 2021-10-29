@@ -2,6 +2,7 @@ package br.com.amado.rhalpha.services;
 
 
 import br.com.amado.rhalpha.model.RegistroPonto;
+import br.com.amado.rhalpha.utils.FormatDateUtil;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -31,20 +32,24 @@ public class GeneratePdfReport {
 
             PdfPTable table = new PdfPTable(3);
             table.setWidthPercentage(60);
-            table.setWidths(new int[]{1, 3, 3});
+            table.setWidths(new int[]{3, 3, 3});
 
             Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 
             PdfPCell hcell;
-            hcell = new PdfPCell(new Phrase("Id", headFont));
-            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.addCell(hcell);
 
             hcell = new PdfPCell(new Phrase("Dia", headFont));
+            hcell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
             hcell = new PdfPCell(new Phrase("Hora do Registro", headFont));
+            hcell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+
+            hcell = new PdfPCell(new Phrase("Tipo", headFont));
+            hcell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
@@ -52,21 +57,22 @@ public class GeneratePdfReport {
 
                 PdfPCell cell;
 
-                cell = new PdfPCell(new Phrase(registro.getId_registro().toString()));
-                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                table.addCell(cell);
-
-                cell = new PdfPCell(new Phrase(registro.getDataRegistro().toString()));
+                cell = new PdfPCell(new Phrase(new FormatDateUtil().formatarDataPadraoConvencional(registro.getDataRegistro())));
                 cell.setPaddingLeft(5);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(cell);
 
                 cell = new PdfPCell((new Phrase(registro.getHoraRegistro().toString())));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(cell);
+
+                cell = new PdfPCell((new Phrase(registro.getTipoRegistro())));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+
             }
 
             PdfWriter.getInstance(document, out);

@@ -51,8 +51,11 @@ public class RegistroPontoRest {
 		RegistroPonto registro = new RegistroPonto();
 		User usuario = userRepository.getById(novoRegistro.getNomeUsuario());
 
-		registro.toRecord(timeValue, dateValue, usuario);
+		String tipo = registroPontoRepository.findPositionToFindTheType(dateValue) % 2 == 0 ? "Entrada" : "Saída";
+
+		registro.toRecord(timeValue, dateValue, usuario, tipo);
 		registroPontoRepository.save(registro);
+
 		return registro.toString();
 	}
 

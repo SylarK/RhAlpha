@@ -33,12 +33,24 @@ public class RegistroPonto {
 	@Column(name = "data_registro")
 	private java.util.Date dataRegistro;
 
+	@Column(name = "tipo_registro")
+	private String tipoRegistro;
+
 	public void toRecord(Time horaRegistro, java.util.Date dateValue, User usuario) {
 
 		this.horaRegistro = horaRegistro;
 		this.dataRegistro = dateValue;
 		this.user = usuario;
 		
+	}
+
+	public void toRecord(Time horaRegistro, java.util.Date dateValue, User usuario, String tipo) {
+
+		this.horaRegistro = horaRegistro;
+		this.dataRegistro = dateValue;
+		this.user = usuario;
+		this.tipoRegistro = tipo;
+
 	}
 
 	public RegistroPonto(){}

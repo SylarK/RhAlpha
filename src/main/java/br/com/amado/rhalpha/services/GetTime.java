@@ -2,8 +2,7 @@ package br.com.amado.rhalpha.services;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 @Service
 public class GetTime {
@@ -11,10 +10,9 @@ public class GetTime {
     static Date date;
     static Calendar c;
 
-    public String recuperarUltimaSemana(){
-        this.initObjs();
-        Date date = new Date();
+    public List<Date> recuperarUltimaSemana(){
 
+        this.initObjs();
         c.setTime(date);
 
         int i = c.get(Calendar.DAY_OF_WEEK) - c.getFirstDayOfWeek();
@@ -23,12 +21,17 @@ public class GetTime {
         Date start = c.getTime();
         c.add(Calendar.DATE, 6);
         Date end = c.getTime();
-        System.out.println(start + " - " + end);
 
-        return "";
+        List<Date> dados = Arrays.asList(
+                start,
+                end
+        );
+
+        return dados;
     }
 
-    public String recuperarSemanaAtual(){
+    public List<Date> recuperarSemanaAtual(){
+
         this.initObjs();
         c.setTime(date);
 
@@ -38,9 +41,13 @@ public class GetTime {
         Date start = c.getTime();
         c.add(Calendar.DATE, 6);
         Date end = c.getTime();
-        System.out.println(start + " - " + end);
 
-        return start + " - " + end;
+        List<Date> dados = Arrays.asList(
+                start,
+                end
+        );
+
+        return dados;
     }
 
     private void initObjs(){
