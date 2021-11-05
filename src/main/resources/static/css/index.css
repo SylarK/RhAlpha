@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
+
 html,body{
     font-family: 'Numans', sans-serif;
-    height: auto;
     background-image: linear-gradient(to top, #fffbfa 0%, #7699a7 100%);
+}
+
+body{
+    min-height: 100vh;
 }
 
 .img-avatar{

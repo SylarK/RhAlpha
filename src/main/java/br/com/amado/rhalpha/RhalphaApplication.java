@@ -17,4 +17,8 @@ public class RhalphaApplication {
 		app.run(args);
 	}
 
+//	public static void main(String[] args) {
+//		SpringApplication.run(RhalphaApplication.class, args);
+//	}
+
 }
