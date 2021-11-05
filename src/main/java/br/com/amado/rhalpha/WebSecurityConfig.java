@@ -19,7 +19,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	DataSource dataSource;
-	
+
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.authorizeRequests().anyRequest().permitAll()
+//				.and().csrf().disable();
+//	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
