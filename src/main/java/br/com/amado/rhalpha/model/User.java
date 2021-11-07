@@ -21,6 +21,7 @@ public class User {
 	private String username;
 	private String password;
 	private Boolean enabled;
+	private Long idDiscord;
 
 	public String getUsernameFromUser(){
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

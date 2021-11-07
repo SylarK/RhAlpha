@@ -7,9 +7,8 @@ import br.com.amado.rhalpha.model.User;
 import br.com.amado.rhalpha.repository.RegistroPontoRepository;
 import br.com.amado.rhalpha.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.sql.Time;
@@ -77,6 +76,32 @@ public class RegistroPontoRest {
 		}
 
 		return lista;
+	}
+
+	@GetMapping("registroBot/{id}")
+	@ResponseBody
+	public ResponseEntity<String> criaRegistroPontoBot (@PathVariable(value = "id") Long idDiscord) throws ParseException {
+
+		User usuario = userRepository.getByIdDiscord(idDiscord);
+
+		LocalDate dateNow = LocalDate.now();
+		LocalTime timeNow = LocalTime.now();
+
+		Time timeValue = Time.valueOf(timeNow);
+		Date dateValue = java.util.Date.from(dateNow.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+
+		RegistroPonto registro = new RegistroPonto();
+
+		String tipo = registroPontoRepository.findPositionToFindTheType(dateValue) % 2 == 0 ? "Entrada" : "Saída";
+
+		registro.toRecord(timeValue, dateValue, usuario, tipo);
+
+		try{
+			registroPontoRepository.save(registro);
+			return ResponseEntity.ok().body("Ponto registrado com sucesso");
+		}catch(Exception e){
+			return ResponseEntity.badRequest().body("Ocorreu um erro ao processar a solicitação. Procure o suporte");
+		}
 	}
 	
 }

@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			.authorizeRequests()
 				.antMatchers("/home/**").permitAll()
 				.antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/ponto/registroBot/**").permitAll()
 				.anyRequest().authenticated()
 			.and()
 			.formLogin(form -> form
