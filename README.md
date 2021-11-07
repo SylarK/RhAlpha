@@ -11,6 +11,11 @@
 
 ------------------------
 
+### <a name="custom_final">Video - Aplicação em Funcionamento</a>
+[![RhAlpha App](https://i9.ytimg.com/vi/jNDaYkbErLQ/mq1.jpg?sqp=COjFn4wG&rs=AOn4CLDl5Ao4C2-YQv3D4ugUyZalTQkuHg)](https://youtu.be/jNDaYkbErLQ "RhAlpha App")
+
+------------------------
+
 ### <a name="custom_stack">Stack</a>
 
 - Java SE11
@@ -43,7 +48,4 @@ Por default:
 > 
 > ![image](https://user-images.githubusercontent.com/40666040/140649032-f9478794-ac48-4167-ae45-b7aa0b7b84ae.png)
 
-------------------------
 
-### <a name="custom_final">Video - Aplicação em Funcionamento</a>
-[![RhAlpha App](https://i9.ytimg.com/vi/jNDaYkbErLQ/mq1.jpg?sqp=COjFn4wG&rs=AOn4CLDl5Ao4C2-YQv3D4ugUyZalTQkuHg)](https://www.youtube.com/watch?v=xyBwRZqSNTs "RhAlpha App")
